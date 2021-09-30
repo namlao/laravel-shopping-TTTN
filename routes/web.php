@@ -411,7 +411,4 @@ Route::group(['prefix'=>'shop'],function (){
 
 //tin tức
 
-Route::get('test-git-2',function (){
-    echo 'hello git 2';
-});
 
