@@ -410,5 +410,7 @@ Route::group(['prefix'=>'shop'],function (){
 });
 
 //tin tức
-
+Route::get('test-git',function (){
+    echo'hello git';
+});
 
