@@ -1,0 +1,12 @@
+.slide-img{
+    max-width: 500px !important;
+    object-fit: cover;
+}
+.img-product{
+    min-height: 270px;
+    object-fit: contain;
+}
+.img-product-350{
+    min-height: 350px;
+    object-fit: contain;
+}

@@ -1,0 +1,5 @@
+.img-product-150-350 {
+    min-width: 250px;
+    min-height: 350px;
+    object-fit: contain;
+}
