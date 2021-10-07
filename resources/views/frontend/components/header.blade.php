@@ -39,7 +39,9 @@
         <div class="row">
             <div class="col-sm-3">
                 <div class="logo">
-                    <h1><a href="{{url('')}}">Máy tính đây</a></h1>
+                    <h1><a href="{{url('')}}">
+                            <img class="logo" src="{{ asset('frontend/img/logo.png') }}" alt="">
+                        </a></h1>
                 </div>
             </div>
             <div class="col-md-6">

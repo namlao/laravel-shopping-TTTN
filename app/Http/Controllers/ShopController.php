@@ -81,12 +81,17 @@ class ShopController extends Controller
     }
     public function postComment(Request $request,$slug){
         $data= [
-            'name' => $request->name,
+
             'email' => $request->email,
             'content' =>$request->review,
             'product_id' => $slug
             ];
-
+        if (auth()->check()){
+            $data['name'] = auth()->user()->name;
+        }else{
+            $data['name'] = $request->name;
+        }
+//        dd($data);
         $this->comment->insert($data);
         return back();
     }

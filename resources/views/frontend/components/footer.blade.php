@@ -4,7 +4,9 @@
         <div class="row">
             <div class="col-md-3 col-sm-6">
                 <div class="footer-about-us">
-                    <h2 class="footer-wid-title">Máy tính đây</h2>
+                    <h2 class="footer-wid-title">
+                        <a href="{{url('')}}"><img class="logo" src="{{ asset('frontend/img/logo.png') }}" alt=""></a>
+                    </h2>
                     <p>{{\App\Helper\getConfigValue::getConfigValue('gioi-thieu')}}</p>
                     <p>Số điện thoại: {{\App\Helper\getConfigValue::getConfigValue('phone_contact')}}</p>
                     <p>Email: {{\App\Helper\getConfigValue::getConfigValue('email')}}</p>

@@ -1,3 +1,4 @@
+
 .slide-img{
     max-width: 500px !important;
     object-fit: cover;
@@ -9,4 +10,8 @@
 .img-product-350{
     min-height: 350px;
     object-fit: contain;
+}
+
+.brand-img{
+    max-width: 50%;
 }

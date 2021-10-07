@@ -38,7 +38,7 @@
           <li class="nav-header">Quản lý sản phẩm</li>
             <li class="nav-item">
             <a href="{{ route('categories.index') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+                <i class="fas fa-folder"></i>
               <p>
                 Danh mục sản phẩm
 {{--                <span class="right badge badge-danger">New</span>--}}
@@ -47,7 +47,7 @@
           </li>
             <li class="nav-item">
                 <a href="{{ route('product.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fab fa-product-hunt"></i>
                     <p>
                         Sản phẩm
                     </p>
@@ -55,25 +55,25 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('comment.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fas fa-comments"></i>
                     <p>
                         Bình luận
                     </p>
                 </a>
             </li>
             <li class="nav-header">Quản lý nội dung</li>
-            <li class="nav-item">
-                <a href="{{ route('menus.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        Menus
-                    </p>
-                </a>
-            </li>
+{{--            <li class="nav-item">--}}
+{{--                <a href="{{ route('menus.index') }}" class="nav-link">--}}
+{{--                    <i class="nav-icon fas fa-th"></i>--}}
+{{--                    <p>--}}
+{{--                        Menus--}}
+{{--                    </p>--}}
+{{--                </a>--}}
+{{--            </li>--}}
 
             <li class="nav-item">
                 <a href="{{ route('slider.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fas fa-sliders-h"></i>
                     <p>
                         Slider
                     </p>
@@ -81,7 +81,7 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('settings.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fas fa-cogs"></i>
                     <p>
                         Settings
                     </p>
@@ -89,16 +89,26 @@
             </li>
             <li class="nav-item">
                 <a href="{{ route('pages.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="far fa-file-alt"></i>
                     <p>
                         Quản lý trang
                     </p>
                 </a>
             </li>
+            <li class="nav-header">Quản lý Đơn hàng</li>
+            <li class="nav-item">
+                <a href="{{ route('order.index') }}" class="nav-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>
+                        Đơn hàng
+                    </p>
+                </a>
+            </li>
+
             <li class="nav-header">Quản lý Nhân viên</li>
             <li class="nav-item">
                 <a href="{{ route('users.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fas fa-user"></i>
                     <p>
                         Danh sách nhân viên
                     </p>
@@ -107,7 +117,7 @@
 
             <li class="nav-item">
                 <a href="{{ route('roles.index') }}" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
+                    <i class="fas fa-user-tag"></i>
                     <p>
                         Danh sách vai trò
                     </p>

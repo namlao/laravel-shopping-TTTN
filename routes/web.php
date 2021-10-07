@@ -318,10 +318,50 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckLogedOut'],function (){
             'uses' => 'CommentController@index',
             'middleware' => 'can:comment_list'
         ]);
+        Route::get('/delete/{id}',[
+            'as' =>'comment.delete',
+            'uses' => 'CommentController@delete',
+            'middleware' => 'can:comment_delete'
+        ]);
 
 
     });
 
+    //order
+    Route::prefix('comment')->group(function(){
+        Route::get('/',[
+            'as' =>'comment.index',
+            'uses' => 'CommentController@index',
+            'middleware' => 'can:comment_list'
+        ]);
+
+
+    });
+    // order
+    Route::prefix('order')->group(function(){
+        Route::get('/',[
+            'as' =>'order.index',
+            'uses' => 'AdminOrderController@index',
+            'middleware' => 'can:order_list'
+        ]);
+        Route::get('/detail/{id}',[
+            'as' =>'order.detail',
+            'uses' => 'AdminOrderController@detail',
+            'middleware' => 'can:order_list'
+        ]);
+        Route::post('/detail/{id}',[
+            'as' =>'order.updateStatus',
+            'uses' => 'AdminOrderController@updateStatus',
+//            'middleware' => 'can:comment_list'
+        ]);
+        Route::get('/delete/{id}',[
+            'as' =>'order.delete',
+            'uses' => 'AdminOrderController@delete',
+            'middleware' => 'can:order_delete'
+        ]);
+
+
+    });
 
     Route::prefix('permissions')->group(function(){
         Route::get('/create',[

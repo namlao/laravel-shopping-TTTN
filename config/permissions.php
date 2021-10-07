@@ -14,7 +14,8 @@
             'user',
             'role',
             'page',
-            'comment'
+            'comment',
+            'order'
         ],
         'module_child' =>[
             'list',

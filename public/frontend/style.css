@@ -1149,3 +1149,11 @@ div.cart-collaterals ul.products li.product:hover .add_to_cart_button{background
 .custom-dropmenu{
     min-width: 320px;
 }
+.logo{
+    max-width: 80px;
+
+}
+.footer-about-us img.logo{
+    max-width: 60px;
+
+}

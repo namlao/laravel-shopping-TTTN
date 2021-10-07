@@ -65,9 +65,10 @@ class CommentPolicty
      * @param  \App\Comment  $comment
      * @return mixed
      */
-    public function delete(User $user, Comment $comment)
+    public function delete(User $user)
     {
         //
+        return $user->checkPermissionAccess('comment_delete');
     }
 
     /**

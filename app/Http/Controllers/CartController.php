@@ -2,13 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Bill;
+use App\BillDetail;
 use App\Category;
+use App\Customer;
 use App\Menu;
 use App\Pages;
 use App\Product;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use DB;
+use Illuminate\Support\Facades\Validator;
 
 class CartController extends Controller
 {
@@ -17,13 +23,19 @@ class CartController extends Controller
     private $category;
     private $product;
     private $page;
-    public function __construct(Menu $menu,Category $category,Product $product,Pages $page)
+    private $customer;
+    private $bill;
+    private $billDetail;
+    public function __construct(Menu $menu,Category $category,Product $product,Pages $page, Customer $customer,Bill $bill,BillDetail $billDetail)
     {
         $this->menu = $menu;
         $this->category = $category;
         $this->product = $product;
         $this->product = $product;
         $this->page = $page;
+        $this->customer = $customer;
+        $this->bill = $bill;
+        $this->billDetail = $billDetail;
     }
 
     public function index(){
@@ -71,17 +83,69 @@ class CartController extends Controller
 
     public function postIndex(Request $request){
         $data['info'] = $request->all();
+
+
         $email = $request->email;
         $data['cart'] = Cart::content();
         $data['total'] = Cart::total();
-        Mail::send('frontend.layouts.email',$data,function ($message) use ($email){
-            $message->from('maianhnamdev@gmail.com','Mai Anh Nam');
-            $message->to($email,$email);
-            $message->cc('canmotcaiten.tn95@gmail.com','Cũng là Nam');
-            $message->subject('Xác nhận đơn hàng');
-        });
-        Cart::destroy();
-        return redirect()->route('complete');
+
+        //lưu database
+        $validate = Validator::make($request->all(),[
+            'email' => 'required|email',
+            'name' => 'required',
+            'phone' => 'required|digits_between:10,12',
+            'address' => 'required'
+        ]);
+        if ($validate->fails()){
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
+        try {
+            DB::beginTransaction();
+            $customer_id = $this->customer->create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone_number' => $request->phone,
+                'address' => $request->address,
+                'note' => $request->note
+
+            ]);
+
+
+            $customer_id = $this->customer->latest()->first();
+            $this->bill -> create([
+                'customer_id' => $customer_id->id,
+                'date_order' => date('Y-m-d H:i:s'),
+                'total' => str_replace(',','',Cart::total()),
+
+            ]);
+            $bill_id = $this->bill->latest()->first();
+            if (count($data['cart']) > 0 ){
+               foreach ($data['cart'] as $key => $item){
+                   $this->billDetail -> create([
+                       'bill_id' => $bill_id->id,
+                       'product_id' => $item->id,
+                       'quantily' => $item ->qty,
+                       'price' => $item->price,
+                   ]);
+               }
+            }
+            //send email
+            Mail::send('frontend.layouts.email',$data,function ($message) use ($email){
+                $message->from('maianhnamdev@gmail.com','Mai Anh Nam');
+                $message->to($email,$email);
+                $message->cc('canmotcaiten.tn95@gmail.com','Cũng là Nam');
+                $message->subject('Xác nhận đơn hàng');
+            });
+            DB::commit();
+            Cart::destroy();
+            return redirect()->route('complete');
+        }catch (\Exception $e){
+            DB::rollBack();
+            Log::error('message' . $e->getMessage() . ' Line: ' . $e->getLine());
+        }
+
     }
     public function getComplete(){
         $menus = $this->menu->get();
@@ -93,8 +157,8 @@ class CartController extends Controller
         $pagesLH = $this->page->where('slug_parent','lien-he')->first();
         return view('frontend.layouts.complele',compact('categoriesLimit','pages','categories','pagesPages','pagesDV','pagesLH','menus'));
     }
-    public function addQty($id,Request $request){
-        dd($request->all());
-    }
+//    public function addQty($id,Request $request){
+//        dd($request->all());
+//    }
 
 }

@@ -68,6 +68,10 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('page-delete','App\Policies\PagePolicy@delete');
 
         Gate::define('comment_list','App\Policies\CommentPolicty@view');
+        Gate::define('comment_delete','App\Policies\CommentPolicty@delete');
+
+        Gate::define('order_list','App\Policies\OrderPolicy@view');
+        Gate::define('order_delete','App\Policies\OrderPolicy@delete');
     }
 
 }
