@@ -28,29 +28,38 @@
                             <div class="form-group">
                                 <label>Tên</label>
                                 <input type="text"
-                                       class="form-control"
-                                       placeholder="Nhập tên menu"
+                                       class="form-control @error('name') is-invalid @enderror"
+                                       placeholder="Nhập tên thành viên"
                                        name="name"
                                        value="{{ old('name') }}"
                                 >
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <input type="text"
-                                       class="form-control"
+                                       class="form-control @error('email') is-invalid @enderror"
                                        placeholder="Nhập Email"
                                        name="email"
                                        value="{{ old('email') }}"
                                 >
+                                @error('email')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">
                                 <label>Password</label>
                                 <input type="password"
-                                       class="form-control"
+                                       class="form-control @error('password') is-invalid @enderror"
                                        placeholder="Nhập password"
                                        name="password"
                                 >
+                                @error('password')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
                             <div class="form-group">

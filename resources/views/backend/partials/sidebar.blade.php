@@ -41,7 +41,6 @@
                 <i class="fas fa-folder"></i>
               <p>
                 Danh mục sản phẩm
-{{--                <span class="right badge badge-danger">New</span>--}}
               </p>
             </a>
           </li>

@@ -6,6 +6,7 @@ use App\Permission;
 use App\Role;
 use App\Traits\DeleteModelTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AdminRoleController extends Controller
 {
@@ -29,6 +30,20 @@ class AdminRoleController extends Controller
         return view('backend.admin.role.add',compact('permissionsParent'));
     }
     public function store(Request $request){
+        $validate = Validator::make($request->all(),[
+            'name' =>  'required',
+            'display_name' => 'required',
+        ],[
+            'name.required' => 'Tên vai trò là bắt buộc',
+            'display_name.required' => 'Mổ tả là bắt buộc',
+
+        ]);
+
+        if ($validate->fails()){
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
         $role = $this->role->create([
             'name' => $request->name,
             'display_name' => $request->display_name

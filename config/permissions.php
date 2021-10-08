@@ -15,7 +15,7 @@
             'role',
             'page',
             'comment',
-            'order'
+            'order',
         ],
         'module_child' =>[
             'list',

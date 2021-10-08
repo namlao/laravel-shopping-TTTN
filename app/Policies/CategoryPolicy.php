@@ -16,10 +16,7 @@ class CategoryPolicy
      * @param  \App\User  $user
      * @return mixed
      */
-    public function viewAny(User $user)
-    {
-        //
-    }
+
 
     /**
      * Determine whether the user can view the category.

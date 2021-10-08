@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Components\Recusive;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -29,6 +30,18 @@ class CategoryController extends Controller
     }
 
     public function store(Request $request){
+        $validate = Validator::make($request->all(),[
+            'name' =>  'required|unique:categories,name'
+        ],[
+            'name.required' => 'Tên chuyên mục là bắt buộc',
+            'name.unique' => 'Tên chuyên mục đã tồn tại',
+        ]);
+        if ($validate->fails()){
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
+
         $this->category->create([
             'name' => $request->name,
             'parent_id' => $request->parent_id,

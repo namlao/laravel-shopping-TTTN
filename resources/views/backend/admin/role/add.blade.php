@@ -23,16 +23,22 @@
                             <div class="form-group">
                                 <label>Tên vai trò</label>
                                 <input type="text"
-                                       class="form-control"
+                                       class="form-control @error('name') is-invalid @enderror"
                                        placeholder="Nhập tên vai trò"
                                        name="name"
                                        value="{{ old('name') }}"
                                 >
+                                @error('name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <div class="form-group">
                                 <label>Mô tả vai trò</label>
                                 <textarea name="display_name" cols="30" rows="4"
-                                          class="form-control">{{ old('display_name') }}</textarea>
+                                          class="form-control @error('display_name') is-invalid @enderror">{{ old('display_name') }}</textarea>
+                                @error('display_name')
+                                <div class="alert alert-danger">{{ $message }}</div>
+                                @enderror
                             </div>
 
 

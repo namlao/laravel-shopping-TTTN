@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -30,16 +32,28 @@ class AdminController extends Controller
     }
 
     public function postLoginAdmin(Request $request){
+        $validate = Validator::make($request->all(),[
+            'email' => 'exists:users,email',
+        ],[
+            'email.exists' => 'Email không tồn tại',
+        ]);
+        if ($validate->fails()){
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
         $remember = $request -> has('remember-me') ? true: false;
         if (auth()->attempt([
             'email' => $request->email,
             'password' => $request->password
         ],$remember)){
             return redirect()->to('admin');
+        }else{
+            Session::flash('errorPassword', 'Mật khẩu không đúng!');
+            return back();
         }
-//        else{
-//            return redirect()->to('admin');
-//        }
+
+
     }
 
     public function logoutAdmin(){

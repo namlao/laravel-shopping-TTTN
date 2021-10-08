@@ -85,7 +85,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Nội dung</label>
-                                <textarea name="contents" class="form-control tinymce_editor_init" rows="8">
+                                <textarea name="contents" class="form-control tinymce_editor_init" rows="15">
                                     {{ $product->content }}
                                 </textarea>
                             </div>

@@ -18,7 +18,7 @@
         #login .container #login-row #login-column #login-box {
             margin-top: 120px;
             max-width: 600px;
-            height: 320px;
+            height: auto;
             border: 1px solid #9C9C9C;
             background-color: #EAEAEA;
         }
@@ -43,11 +43,21 @@
                         <h3 class="text-center text-info">Login</h3>
                         <div class="form-group">
                             <label for="email" class="text-info">Username:</label><br>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" required value="{{ old('email') }}">
+                            @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+
                         </div>
                         <div class="form-group">
                             <label for="password" class="text-info">Password:</label><br>
-                            <input type="password" name="password" id="password" class="form-control">
+                            <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror " required value="{{ old('password') }}">
+                            @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            @if(Session::has('errorPassword'))
+                                <div class="alert alert-danger">{{ Session::get('errorPassword') }}</div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>

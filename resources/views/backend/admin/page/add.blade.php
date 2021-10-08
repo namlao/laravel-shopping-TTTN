@@ -32,7 +32,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Nội dung</label>
-                                    <textarea name="contents" class="form-control tinymce_editor_init @error('contents') is-invalid @enderror" rows="8">{{ old('contents') }}</textarea>
+                                    <textarea name="contents" class="form-control tinymce_editor_init @error('contents') is-invalid @enderror" rows="15">{{ old('contents') }}</textarea>
                                     @error('contents')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror

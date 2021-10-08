@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class AdminUserController extends Controller
 {
@@ -28,11 +29,29 @@ class AdminUserController extends Controller
     }
 
     public function create(){
+
         $roles = $this->role->all();
         return view('backend.admin.user.add',compact('roles'));
     }
 
     public function store(Request $request){
+        $validate = Validator::make($request->all(),[
+            'name' =>  'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|max:20'
+        ],[
+            'name.required' => 'Tên thành viên là bắt buộc',
+            'email.required' => 'Email là bắt buộc',
+            'email.email' => 'Email không đúng định dạng',
+            'password.required' => 'Password là bắt buộc',
+            'password.min' => 'Password không được dưới 8 ký tự',
+            'password.max' => 'Password không vượt quá 20 ký tự',
+        ]);
+        if ($validate->fails()){
+            return redirect()->back()
+                ->withErrors($validate)
+                ->withInput();
+        }
         try {
             DB::beginTransaction();
             $user = $this->user->create([

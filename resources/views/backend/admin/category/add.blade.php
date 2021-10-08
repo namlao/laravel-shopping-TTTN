@@ -14,10 +14,14 @@
                     <div class="form-group">
                       <label>Tên danh mục</label>
                       <input type="text"
-                             class="form-control"
+                             class="form-control @error('name') is-invalid @enderror"
                              placeholder="Tên danh mục"
                              name="name"
+                             value="{{ old('name') }}"
                       >
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <label>Danh mục cha</label>
