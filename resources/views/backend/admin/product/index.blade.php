@@ -39,7 +39,7 @@
                                     <td>{{ $productItem->name }}</td>
                                     <td>{{ number_format($productItem->price) }}</td>
                                     <td>
-                                        <img class="product_image_150_100" src="{{ $productItem->feature_image_path }}" alt="">
+                                        <img class="product_image_150_100" src="{{ url($productItem->feature_image_path) }}" alt="">
                                     </td>
                                     <td>{{ optional($productItem->category)->name }}</td>
                                     <td>

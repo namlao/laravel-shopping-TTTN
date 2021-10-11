@@ -17,9 +17,9 @@
                     <li class="nav-item">
                         <a href="{{route('shop.index')}}" class="navbar-link">Shop</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{route('shop.index')}}" class="navbar-link">Tin tức</a>
-                    </li>
+{{--                    <li class="nav-item">--}}
+{{--                        <a href="{{route('shop.index')}}" class="navbar-link">Tin tức</a>--}}
+{{--                    </li>--}}
 {{--                    @foreach($categoriesLimit as $categoryParent)--}}
 {{--                        <li class="nav-item dropdown">--}}
 {{--                            <a class="nav-link dropdown-toggle" href="{{$categoryParent->slug}}"--}}

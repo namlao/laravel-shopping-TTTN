@@ -449,6 +449,4 @@ Route::group(['prefix'=>'shop'],function (){
     ]);
 });
 
-//tin tức
-
 
